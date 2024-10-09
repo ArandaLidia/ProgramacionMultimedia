@@ -8,7 +8,7 @@ fun main(){
     var nombre : String? = readln()
     println("Introduce tu  apellido")
     var apellidos : String = readln()
-    if (apellidos==null){
+    if (apellidos==""){
         println("Lo siento, apellido no válido")
     }
     println("Introduce tu  edad")
