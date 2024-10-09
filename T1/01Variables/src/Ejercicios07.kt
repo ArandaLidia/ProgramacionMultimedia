@@ -1,11 +1,13 @@
-//Declara una variable llamada "temperatura" de tipo Float y asígnale una temperatura en grados Celsius.
+//7. Declara una variable llamada "temperatura" de tipo Float y asígnale una temperatura en grados Celsius.
 
- class Ejercicios07 {
+    fun main(){
+        var temperatura : Float = 25.6F
 
-      var temperatura : Float = 25.6F
+        fun asignarTemperatura ():Float{
+            var temperatura1 : Float
+            temperatura1 = 30.8f
+            return temperatura1
+        }
 
-     fun asignarTemperatura (){
-         var temperatura1 : Float
-         temperatura1 = 30.8f
-     }
- }
+        println("La temperatura es: ${asignarTemperatura()}")
+    }

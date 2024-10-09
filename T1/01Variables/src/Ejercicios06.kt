@@ -1,14 +1,14 @@
-//. Declara una variable llamada "numeroDeMes" de tipo Int y asígnale un valor entre 1 y 12 que represente un mes del año.
+//6. Declara una variable llamada "numeroDeMes" de tipo Int y asígnale un valor entre 1 y 12 que represente un mes del año.
 
-class Ejercicios06 {
+    fun main(){
+        var numeroDeMes : Int = 5
 
-    var numeroDeMes : Int = 5
 
+        fun numeroDeMes (): Int{
+            var numeroDeMes1 : Int
+            numeroDeMes1 = 7
+                return numeroDeMes1
 
-    fun numeroDeMes (){
-        var numeroDeMes1 : Int
-        numeroDeMes1 = 7
-        println("El número de mes es ${numeroDeMes1}")
+        }
+        println("El número de mes es ${numeroDeMes()}")
     }
-
-}
