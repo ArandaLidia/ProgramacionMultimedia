@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Al poner linearLayout es obligatorio poner la orientación-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:padding="24dp">
-
-
+    android:padding="24dp"
+    tools:context=".MainActivity">
     <!-- LinearLayout horizontal que contiene el ToggleButton y el TextView
 
-    - Este contenedor organiza los elementos en una fila horizontal.
-    - `android:layout_width="match_parent"` hace que ocupe todo el ancho de la pantalla.
-    - `android:layout_height="wrap_content"` ajusta la altura al contenido.
-    -->
+      - Este contenedor organiza los elementos en una fila horizontal.
+      - `android:layout_width="match_parent"` hace que ocupe todo el ancho de la pantalla.
+      - `android:layout_height="wrap_content"` ajusta la altura al contenido.
+      -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,14 +33,19 @@
                           - TEXTON= "ACTIVADO"
 
         -->
+       <!--En drawable crear Drawable resource file, de nombre backgroun file :
+       <item android:state_checked="true" android:drawable="@drawable/on"/>
+        <item android:state_checked="false" android:drawable="@drawable/off"
+
+        Tantos item como sean necesarios: si el checked es true, coge la imagen drawable on,
+        si el checked es false, coge la imagen en drawable off-->
         <ToggleButton
             android:id="@+id/toggleSelection"
             android:checked="true"
-            android:textOff="Desactivado"
-            android:textOn="Activado"
+            android:background="@drawable/background_toggle"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content" />
+            android:layout_height="100dp" />
 
         <!--
         TextView: texto que muestra el estado del ToggleButton
@@ -76,16 +77,44 @@
     - `android:text="Comprobar"` establece el texto que se muestra en el botón.
     - `android:textSize="18sp"` configura el tamaño del texto en 18 "scaled pixels".
     -->
-    <CheckBox
+    <!--Checkbox layout gravity right para que aparezca en la derecha -->
+<!-- checked = true  -> marca  la casilla de verificación -->
+    <!--El Switch funciona igual que el checkbox, es una pestaña de activar o desactivar -->
+    <Switch
+        android:checked="true"
+        android:id="@+id/checkActivar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="Activar"/>
+
+    <RadioGroup
+        android:id="@+id/grupoRadios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <!-- margin right dar margen a la derecha, orientacion y gravity. el gravity puede ser end.-->
+        <RadioButton
+            android:id="@+id/idRadio1"
+            android:layout_marginRight="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opcion 1"/>
+        <RadioButton
+            android:id="@+id/idRadio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opción 2"/>
+
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnComprobar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comprobar"
         android:textSize="18sp" />
+</LinearLayout>
 
-</LinearLayout> <!-- Fin del LinearLayout principal -->

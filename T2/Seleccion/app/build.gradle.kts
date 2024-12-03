@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.seccion"
+    namespace = "com.example.seleccion"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.seccion"
+        applicationId = "com.example.seleccion"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -33,7 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-//Hacer al inicio de cada proyecto
     viewBinding{
         enable = true
     }
