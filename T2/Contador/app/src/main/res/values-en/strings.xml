@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--NEW VALUES RESOURCES llamarle de la misma manera : String , valor Locale, elegir idioma.
+        En la nueva ventana copiar los string, dar a abrir editor, y actualizar, cambiar la palabra al idioma.
+
+        En activity main, en el boton poner: android:text="@string/restart"
+        -->
+        <string name="app_name">Counter</string>
+        <string name="restart">Restart</string>
+
+</resources>

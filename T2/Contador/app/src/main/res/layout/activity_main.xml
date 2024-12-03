@@ -1,19 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+Este archivo define el diseño de la interfaz gráfica para una actividad.
+Se utiliza un contenedor principal `LinearLayout` que organiza los elementos en una disposición vertical.
+-->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <!--
+          WRAP_CONTENT : Utiliza el mínimo que necesita
+          MATCH_PARENT:se pega a su padre, el maximo DEL contenedor, en este caso toda la pantalla.
+          Si se quiere compartir el ancho o alto: Compartir eje x:  width ="wrap_content" height= "0dp" y weight= "0.33"
+          La suma de todos los item weight tiene que ser 1.
+          CENTRAR EL CONTINENTE: layout_gravity: "center"
+          CENTRAR EL CONTENIDO gravity= "center"
+           -->
+   <!--
+     Contenedor principal: LinearLayout
 
+     - Se utiliza para organizar los elementos hijos en una disposición **vertical** (uno debajo del otro).
+     - `android:orientation="vertical"` define que los elementos se apilen en columna.
+     - `android:layout_width="match_parent"` y `android:layout_height="match_parent"` indican que el contenedor ocupará toda la pantalla.
+     - `android:weightSum="1"` establece que todos los elementos hijos comparten una proporción común de espacio.
+     - `tools:context=".MainActivity"` sirve para previsualizar el diseño en el editor vinculado con la actividad `MainActivity`.
+     -->
+
+    <!-- Texto para mostrar el contador
+    Si vas a usar un elemento en la parte lógica es OBLIGATORIO que tenga ID-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:text="0"
+        android:textSize="40sp"
+        android:id="@+id/textoContador"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--
+    TextView: texto del contador
+
+    - Este componente muestra el valor del contador al usuario (inicia con "0").
+    - `android:layout_width="match_parent"` hace que el texto ocupe todo el ancho del contenedor.
+    - `android:layout_height="0dp"` indica que su altura será controlada exclusivamente por `layout_weight`.
+    - `android:layout_weight="0.33"` asigna el 33% del espacio total del contenedor al TextView.
+    - `android:gravity="center"` centra el texto dentro del componente (horizontal y verticalmente).
+    - `android:textSize="40sp"` establece el tamaño del texto en 40 "scaled pixels" (dependen de la densidad de pantalla).
+    - `android:id="@+id/textoContador"` da un identificador único para acceder al TextView desde el código Java/Kotlin.
+    -->
+
+    <!-- Botón para incrementar el contador -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:text="+"
+        android:textSize="40sp"
+        android:id="@+id/btnIncremento"
+        />
+
+    <!--
+    Botón de incremento
+
+    - Este botón aumentará el valor del contador al ser pulsado.
+    - `android:layout_width="match_parent"` hace que ocupe todo el ancho del contenedor.
+    - `android:layout_height="0dp"` indica que su altura también será controlada por `layout_weight`.
+    - `android:layout_weight="0.33"` asigna el 33% del espacio total al botón.
+    - `android:text="+"` define el texto que se mostrará en el botón (un símbolo "+" en este caso).
+    - `android:textSize="40sp"` establece el tamaño del texto del botón.
+    - `android:id="@+id/btnIncremento"` permite acceder al botón desde el código.
+    -->
+
+    <!-- Botón para decrementar el contador -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:text="-"
+        android:textSize="40sp"
+        android:id="@+id/btnDecremento"
+        />
+
+    <!--
+    Botón de decremento
+
+    - Este botón disminuirá el valor del contador al ser pulsado.
+    - Las propiedades son casi idénticas al botón de incremento:
+        - `android:layout_width="match_parent"` ocupa todo el ancho.
+        - `android:layout_height="0dp"` su altura es controlada por `layout_weight`.
+        - `android:layout_weight="0.33"` le asigna el 33% del espacio total.
+        - `android:text="-"` muestra el texto "-" en el botón.
+        - `android:textSize="40sp"` define el tamaño del texto.
+        - `android:id="@+id/btnDecremento"` permite acceder a este botón en el código Java/Kotlin.
+    -->
+
+</LinearLayout>
+

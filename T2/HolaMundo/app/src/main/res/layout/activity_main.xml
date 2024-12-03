@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Este es el encabezado estándar de un archivo XML. Indica que el archivo está en formato XML y utiliza la codificación de caracteres UTF-8,
+    que permite representar prácticamente todos los caracteres en cualquier idioma.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <!--
+        Este es el contenedor principal del diseño (ConstraintLayout).
+        ConstraintLayout es un layout flexible que permite posicionar los elementos en relación con otros componentes o los bordes del contenedor.
+        Usamos "match_parent" para que el contenedor ocupe todo el ancho y alto de la pantalla.
+
+        Los espacios de nombres definidos (xmlns:...) son para utilizar atributos específicos de Android (android:),
+        configuraciones de herramientas adicionales (tools:), y restricciones de diseño (app:).
+    -->
 
     <TextView
         android:id="@+id/textView"
@@ -17,6 +32,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--
+        Este es un TextView, que se utiliza para mostrar texto en pantalla.
+
+        1. `android:id="@+id/textView"`: Se le asigna un identificador único "textView" para que podamos referenciarlo desde el código de la actividad.
+        2. `android:layout_width="wrap_content"`: El ancho del TextView será tan grande como el contenido que tiene (el texto "Hola Mundo!").
+        3. `android:layout_height="wrap_content"`: La altura del TextView será tan grande como el contenido que tiene.
+        4. `android:text="Hola Mundo!"`: Establece el texto que aparecerá en el componente.
+
+        Las restricciones (constraints) indican la posición del TextView dentro del ConstraintLayout:
+        - `app:layout_constraintTop_toTopOf="parent"`: Sitúa la parte superior del TextView al nivel de la parte superior del contenedor.
+        - `app:layout_constraintBottom_toBottomOf="parent"`: Sitúa la parte inferior del TextView al nivel de la parte inferior del contenedor.
+        - `app:layout_constraintStart_toStartOf="parent"`: Sitúa el inicio del TextView (izquierda, en LTR) al nivel del borde izquierdo del contenedor.
+        - `app:layout_constraintEnd_toEndOf="parent"`: Sitúa el final del TextView (derecha, en LTR) al nivel del borde derecho del contenedor.
+
+        Estas restricciones hacen que el TextView quede perfectamente centrado en el diseño.
+    -->
+
     <Button
         android:id="@+id/BotonPulsar"
         android:layout_width="wrap_content"
@@ -27,6 +59,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--
+        Este es un botón interactivo que el usuario puede pulsar.
+
+        1. `android:id="@+id/BotonPulsar"`: Le asignamos un identificador único "BotonPulsar" para usarlo en el código (por ejemplo, al configurar un `OnClickListener`).
+        2. `android:layout_width="wrap_content"`: El ancho del botón se ajustará automáticamente al texto que contiene.
+        3. `android:layout_height="wrap_content"`: La altura del botón se ajustará automáticamente al texto que contiene.
+        4. `android:text="Pulsa aquí"`: Define el texto que aparecerá dentro del botón.
+
+        Restricciones:
+        - `app:layout_constraintBottom_toTopOf="@+id/textView"`: Posiciona la parte inferior del botón justo encima del TextView.
+        - `app:layout_constraintStart_toStartOf="parent"` y `app:layout_constraintEnd_toEndOf="parent"`: Centran el botón horizontalmente dentro del diseño.
+        - `app:layout_constraintTop_toTopOf="parent"`: Alinea la parte superior del botón con la parte superior del diseño.
+          (Esto último no afecta mucho debido a la restricción de "Bottom_toTopOf" que manda en este caso).
+    -->
+
     <Button
         android:id="@+id/botonSecundario"
         android:layout_width="wrap_content"
@@ -36,5 +83,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <!--
+        Este es otro botón interactivo.
+
+        1. `android:id="@+id/botonSecundario"`: Tiene un identificador único "botonSecundario".
+        2. `android:layout_width` y `android:layout_height` están configurados como "wrap_content", por lo que el botón se ajustará al tamaño del texto que contiene.
+        3. `android:text="Segundo botón"`: Texto que aparecerá dentro del botón.
+
+        Restricciones:
+        - `app:layout_constraintTop_toBottomOf="@+id/textView"`: Posiciona la parte superior del botón justo debajo del TextView.
+        - `app:layout_constraintStart_toStartOf="parent"` y `app:layout_constraintEnd_toEndOf="parent"`: Centran horizontalmente el botón en el diseño.
+        - `app:layout_constraintBottom_toBottomOf="parent"`: Alinea la parte inferior del botón con el borde inferior del diseño.
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
