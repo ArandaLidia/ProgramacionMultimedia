@@ -1,5 +1,6 @@
 package com.example.seleccion
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,140 +15,229 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.seleccion.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
-////PRIMERO : EN BUILD.GRADLE.KTS viewBinding { enable = true } y sincronizar
-////SEGUNDO: CREAR VARIABLE EN MAINACTIVITY: private lateinit var: activity var binding: ActivityMainBinding
-////TERCERO: inicializar variable despues super.onCreate -> binding = ActivityMainBinding.inflate(layoutInflater)
+// **PASOS PARA CONFIGURAR VIEW BINDING**
 
+// 1. En el archivo `build.gradle.kts`:
+//    Habilitar View Binding añadiendo lo siguiente:
+//    viewBinding { enable = true }
+//    Esto permite acceder directamente a las vistas desde su ID sin usar `findViewById`.
+//    Luego, sincronizar el proyecto para aplicar los cambios.
 
+// 2. Declarar una variable en MainActivity para manejar el binding:
+//    private lateinit var binding: ActivityMainBinding
+//    Se utiliza "lateinit" porque la inicialización se realiza en el método onCreate.
 
-//CAMBIAR EL ESTADO AL PULSAR BOTON COMPROBAR, O CAMBIAR RESULTADO AL PULSAR EL BOTON TOGGLER PARA ACTIVAR O DESACTIVAR.
-//AL BOTON COMPROBAR
-//1º binding.btnComprobar.setOnclikListener(this)
-//2º EN override fun onClic(p0: View?){
+// 3. Inicializar el binding después de `super.onCreate`:
+//    binding = ActivityMainBinding.inflate(layoutInflater)
+//    Luego, establecer la vista principal:
+//    setContentView(binding.root)
 
-//when(p0.id) {
-//binding.btnComprobar.id ->{  --El boton que se ha pulsado, el identificador ha sido btnComprobar?  -> introducir metodo.
-//Sacar el estado de un elemento con snackbar: Devuelve true o false
-//Snackbar.make(binding.root, "El estado del toggle es ${binding.toggleSeleccion.isChecked}", Snackbar.LENGTH_SHORT).show
+// **MANEJO DE EVENTOS DE BOTONES Y OTROS COMPONENTES**
 
-//PARA QUE CAMBIE AL PULSAR EN EL TOGGLE
-//1º binding.toggleSeleccion.setOnCheckedChangeListener(Listener: CompoundButton.Oncheck......)
-//binding.toggleSelecction.setOnCheckedChangeListener(this)
-//2º implementarlo en class MainActivity
-//OnCheckedChangeListener (CompoundButton) CompoundButton porque tiene dos estados true o false
-//3ºImplementar metodo
-//4º override fun onCheckedChanged(p0: CompounButton?, p1:Boolean){   p1 : Boolean = Si es false o true
-//      when(p0?.id){  -  -> Si el id p= es el que proboca el cambio
-//  binding.toggleSeleccion.id ->{  ->id toogleSeleccion es el toogle. cuando va cambiando true o false
-//          binding.textoToggle.text = p1.toString()   ->  en el textview (textotoogle) Pone true o false dependiendo si el toogle esta activado o no.
+// **CAMBIAR EL ESTADO AL PULSAR EL BOTÓN "COMPROBAR"**
+// 1. Configurar un listener en el botón "Comprobar":
+//    binding.btnComprobar.setOnClickListener(this)
+//    Esto delega el manejo del clic al método onClick.
+
+// 2. En el método `override fun onClick(p0: View?)`:
+//    Usar un `when` para identificar qué componente disparó el evento:
+//    when (p0?.id) {
+//        binding.btnComprobar.id -> {
+//            // Mostrar el estado del ToggleButton en un Snackbar:
+//            Snackbar.make(
+//                binding.root,
+//                "El estado del toggle es ${binding.toggleSeleccion.isChecked}",
+//                Snackbar.LENGTH_SHORT
+//            ).show()
 //        }
-// }
-//5º en onClick
-// binding.btnComprobar.id ->{
-//                binding.toggleSelection.isChecked =! binding.toggleSelection.isChecked   -> Cada vez que pulsamos boton comprobar, aparece la otra opcion.
-//            }
-//EL CHECKED, CUANDO ESTÁ ACTIVADO DESACTIVAR EL BOTON
-// binding.checkActivar.id ->{
-//                binding.btnComprobar.isEnabled = isChecked; //Al pulsar el cheked y desactivarlo, se desactiva el boton comprobar
-//            }
+//    }
 
-//RADIO GROUP
-//OPCION 1 -> Preguntar por el identificador
-// val seleccionado: Int = binding.grupoRadios.checkedRadioButtonId   -> Devuelve el id del radioButton seleccionado
-//                when(seleccionado){   -> switch
-//                    binding.idRadio1.id -> {}
-//                    binding.idRadio2.id -> {}
-//                }
+// **CAMBIAR RESULTADO AL PULSAR EN EL TOGGLEBUTTON**
+// 1. Configurar un listener para el ToggleButton:
+//    binding.toggleSeleccion.setOnCheckedChangeListener(this)
+//    Esto permite escuchar los cambios de estado del ToggleButton.
 
-//OPCION 2: TEXTO DEL QUE ESTÁ SELECCIONADO
-// val seleccionado: RadioButton = binding.grupoRadios.checkedRadioButtonId
-//val seleccionado : RadioButton = findViewById(binding.grupoRadios.checkedRadioButtonId); //Me das un id y te devuelvo una vista.
-//                Snackbar.make(binding.root, "El seleccionado es ${seleccionado.text}", Snackbar.LENGTH_SHORT).show()
-//Devuelve un Snackbar diciendo que radiobutton es el seleccionado con el FINDVIEWBYID
-//Sacar la vista es sacar el elemento, el radio seleccionado, etc
+// 2. Implementar la interfaz `CompoundButton.OnCheckedChangeListener` en MainActivity:
+//    Es necesario implementar el método `onCheckedChanged`.
 
-//PARA PONER A ESCUCHAR EL RADIO GROUP, IMPLEMENTAMOS -> OnCheckedChangeListener (radio.group) e implementamos members
-
-// Clase principal de la actividad que extiende AppCompatActivity
-// Implementa las interfaces OnClickListener y OnCheckedChangeListener para manejar eventos de clic y cambios de estado.
-//En el metodo se puede implementar que si se selecciona una opcion se habiliten cosas y si se selecciona otra, se habiliten otras.
-//override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-//        when(checkedId){
-//            binding.idRadio1.id ->{
-//
-//            }
-//            binding.idRadio2.id->{
-//
+// 3. Sobrescribir el método de la interfaz:
+//    override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+//        // El parámetro `p1` indica si el componente está activado (true) o desactivado (false).
+//        when (p0?.id) {
+//            binding.toggleSeleccion.id -> {
+//                // Cambiar el texto de un TextView para reflejar el estado actual del ToggleButton:
+//                binding.textoToggle.text = p1.toString()
 //            }
 //        }
 //    }
 
-//DESCARGAR BOTONES y ponerlos en androidstudio.
-//Descargar imagenes y ponerlos en drawable, pegar
-//new drawable resource file : nombre: background_toggle
-//Sale el xml
-class MainActivity : AppCompatActivity(), OnClickListener, OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
-    // Variable privada para el enlace de vistas usando View Binding.
+// 4. Alternar el estado del ToggleButton desde el botón "Comprobar":
+//    when (p0?.id) {
+//        binding.btnComprobar.id -> {
+//            // Cambiar el estado del ToggleButton al pulsar "Comprobar":
+//            binding.toggleSeleccion.isChecked = !binding.toggleSeleccion.isChecked
+//        }
+//    }
+
+// **DESACTIVAR EL BOTÓN "COMPROBAR" SEGÚN EL ESTADO DE UN CHECKBOX**
+// 1. Escuchar cambios en el CheckBox:
+//    Añadir un listener en el CheckBox para que al cambiar su estado active o desactive el botón:
+//    binding.checkActivar.setOnCheckedChangeListener { _, isChecked ->
+//        // Habilitar o deshabilitar el botón "Comprobar" según el estado del CheckBox:
+//        binding.btnComprobar.isEnabled = isChecked
+//    }
+
+// **RADIO GROUP: MANEJO DE BOTONES DE RADIO**
+// 1. Obtener el botón seleccionado usando su identificador (ID):
+//    val seleccionado: Int = binding.grupoRadios.checkedRadioButtonId
+//    Usar un `when` para manejar acciones basadas en el botón seleccionado:
+//    when (seleccionado) {
+//        binding.idRadio1.id -> {
+//            // Acción para el RadioButton 1.
+//        }
+//        binding.idRadio2.id -> {
+//            // Acción para el RadioButton 2.
+//        }
+//    }
+
+// 2. Obtener el texto del botón seleccionado:
+//    val seleccionado: RadioButton = findViewById(binding.grupoRadios.checkedRadioButtonId)
+//    Mostrar el texto del RadioButton seleccionado en un Snackbar:
+//    Snackbar.make(
+//        binding.root,
+//        "El seleccionado es ${seleccionado.text}",
+//        Snackbar.LENGTH_SHORT
+//    ).show()
+
+// **ESCUCHAR CAMBIOS EN EL RADIO GROUP**
+// 1. Configurar un listener para el RadioGroup:
+//    binding.grupoRadios.setOnCheckedChangeListener(this)
+
+// 2. Implementar la interfaz `RadioGroup.OnCheckedChangeListener`:
+//    Al implementar esta interfaz, MainActivity debe sobrescribir el método `onCheckedChanged`.
+
+// 3. Sobrescribir el método de la interfaz:
+//    override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+//        // `checkedId` indica el ID del RadioButton seleccionado.
+//        when (checkedId) {
+//            binding.idRadio1.id -> {
+//                // Acción para la selección del RadioButton 1.
+//            }
+//            binding.idRadio2.id -> {
+//                // Acción para la selección del RadioButton 2.
+//            }
+//        }
+//    }
+
+// **IMPLEMENTACIÓN DE INTERFACES**
+// MainActivity implementa las siguientes interfaces:
+// 1. `OnClickListener`: Para manejar clics en botones.
+// 2. `CompoundButton.OnCheckedChangeListener`: Para manejar cambios en componentes como ToggleButton o CheckBox.
+// 3. `RadioGroup.OnCheckedChangeListener`: Para manejar cambios de selección en un grupo de RadioButtons.
+
+// Estas interfaces centralizan el manejo de eventos en una sola clase, haciendo que el código sea más organizado y mantenible.
+
+// **PASOS ADICIONALES PARA DISEÑO**
+// 1. Descargar imágenes necesarias y copiarlas en la carpeta `drawable`.
+// 2. Crear un archivo XML para personalizar el diseño del ToggleButton:
+//    - Hacer clic derecho en la carpeta `drawable` -> New -> Drawable resource file.
+//    - Asignar un nombre, por ejemplo, `background_toggle`.
+//    - En el archivo XML, definir un diseño personalizado (por ejemplo, usar `<selector>` para cambiar colores según el estado del ToggleButton).
+
+class MainActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
+
+    // Variable privada para usar View Binding. Esto ayuda a acceder a las vistas del layout sin usar findViewById repetidamente.
     private lateinit var binding: ActivityMainBinding
 
-    // Método llamado al crear la actividad.
+    // Método que se ejecuta al iniciar la actividad.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inicializa el binding para la actividad, vinculando la interfaz de usuario.
+        // Inicialización de View Binding para vincular el archivo XML con la lógica del código.
+        // El archivo `ActivityMainBinding` se genera automáticamente a partir de `activity_main.xml`.
         binding = ActivityMainBinding.inflate(layoutInflater)
-        // Establece la vista de la actividad al layout inflado.
+
+        // Asignamos el layout inflado como la vista principal de la actividad.
         setContentView(binding.root)
 
-        // Asocia el listener de clics al botón btnComprobar.
+        // Configuramos los listeners para los botones y otros componentes interactivos.
+
+        // Este botón (btnComprobar) activará la lógica definida en el método `onClick`.
         binding.btnComprobar.setOnClickListener(this)
-        // Asocia el listener de cambios de estado al ToggleButton toggleSelection.
+
+        // Este ToggleButton (toggleSelection) llamará al método `onCheckedChanged` cada vez que se cambie su estado (ON/OFF).
         binding.toggleSelection.setOnCheckedChangeListener(this)
-        binding.checkActivar.setOnCheckedChangeListener(this) //Usa el mismo metodo setOnCheckedChangeListener
-    }
 
-    // Método que se ejecuta cuando se hace clic en un elemento de la vista.
-    override fun onClick(v: View?) {
-        // Verifica si el elemento que se ha clicado es el botón btnComprobar.
-        when (v?.id) {
-            binding.btnComprobar.id ->{
-                binding.toggleSelection.isChecked =! binding.toggleSelection.isChecked
+        // Este CheckBox (checkActivar) también invocará `onCheckedChanged` para habilitar o deshabilitar el botón `btnComprobar`.
+        binding.checkActivar.setOnCheckedChangeListener(this)
 
-                val seleccionado : RadioButton = findViewById(binding.grupoRadios.checkedRadioButtonId); //Me das un id y te devuelvo una vista.
-                Snackbar.make(binding.root, "El seleccionado es ${seleccionado.text}", Snackbar.LENGTH_SHORT).show()
-                /*val seleccionado: Int = binding.grupoRadios.checkedRadioButtonId
-                when(seleccionado){
-                    binding.idRadio1.id -> {}
-                    binding.idRadio2.id -> {}
-                }*/
-            }
-
-
+        binding.botonCambiar.setOnClickListener {
+            // Inicia CochesActivity
+            val intent = Intent(this, CochesActivity::class.java)
+            startActivity(intent)
         }
     }
 
+    // Método que se ejecuta al hacer clic en un botón.
+    override fun onClick(v: View?) {
+        // Verificamos qué vista ha generado el evento clic.
+        when (v?.id) {
+            // Si el clic fue en el botón `btnComprobar`...
+            binding.btnComprobar.id -> {
+                // Alternamos el estado del ToggleButton (`true` a `false` o viceversa).
+                binding.toggleSelection.isChecked = !binding.toggleSelection.isChecked
+
+                // Obtenemos el botón de radio seleccionado dentro del grupo de botones de radio.
+                val seleccionado: RadioButton = findViewById(binding.grupoRadios.checkedRadioButtonId)
+
+                // Mostramos un mensaje (Snackbar) indicando cuál opción de radio está seleccionada.
+                Snackbar.make(binding.root, "El seleccionado es ${seleccionado.text}", Snackbar.LENGTH_SHORT).show()
+
+                // Alternativa: Podríamos usar un `when` para reaccionar según el ID del botón de radio seleccionado.
+                /*
+                val seleccionado: Int = binding.grupoRadios.checkedRadioButtonId
+                when(seleccionado){
+                    binding.idRadio1.id -> { // Lógica para el primer radio button. }
+                    binding.idRadio2.id -> { // Lógica para el segundo radio button. }
+                }
+                */
+                // Configura el OnClickListener para el botón "Cambiar ventana"
+
+            }
+        }
+    }
+
+    // Método que se ejecuta cuando cambia el estado de un CompoundButton (ToggleButton o CheckBox).
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        // Verificamos qué botón generó el cambio.
         when (buttonView?.id) {
+            // Si fue el ToggleButton (toggleSelection)...
             binding.toggleSelection.id -> {
-                // Actualiza el texto del TextView textoToggle con el estado del ToggleButton (true o false).
+                // Actualizamos el texto del TextView (textoToggle) para reflejar el estado actual del ToggleButton.
                 binding.textoToggle.text = isChecked.toString()
             }
-            binding.checkActivar.id ->{
-                binding.btnComprobar.isEnabled = isChecked; //Al pulsar el cheked y desactivarlo, se desactiva el boton comprobar
+
+            // Si fue el CheckBox (checkActivar)...
+            binding.checkActivar.id -> {
+                // Habilitamos o deshabilitamos el botón `btnComprobar` según el estado del CheckBox.
+                binding.btnComprobar.isEnabled = isChecked
             }
         }
     }
 
+    // Método que se ejecuta cuando cambia la selección en el grupo de botones de radio.
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-        when(checkedId){
-            binding.idRadio1.id ->{
-
+        // Verificamos cuál botón de radio se seleccionó.
+        when (checkedId) {
+            // Si se selecciona el primer botón de radio...
+            binding.idRadio1.id -> {
+                // Aquí podemos definir la lógica que debe ejecutarse cuando este botón sea seleccionado.
             }
-            binding.idRadio2.id->{
 
+            // Si se selecciona el segundo botón de radio...
+            binding.idRadio2.id -> {
+                // Lógica para la segunda opción.
             }
         }
     }
 }
-
-

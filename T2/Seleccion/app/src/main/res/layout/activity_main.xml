@@ -116,5 +116,11 @@
         android:layout_height="wrap_content"
         android:text="Comprobar"
         android:textSize="18sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cambiar ventana"
+        android:id="@+id/botonCambiar"/>
 </LinearLayout>
 
