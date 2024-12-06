@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppIMC</string>
+    <string name="txtMasc">Masculino</string>
+    <string name="txtFem">Femenino</string>
+    <string name="hint_altura">Introduce la altura</string>
+    <string name="hint_peso">Introduce el peso</string>
+    <string name="calcular">Calcular</string>
+    <string name="CalculoIMC">Calculo de IMC</string>
+
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppIMC</string>
+    <string name="txtMasc">Male</string>
+    <string name="txtFem">Female</string>
+    <string name="hint_altura">Enter the height</string>
+    <string name="hint_peso">Enter the weight</string>
+    <string name="calcular">Calculate</string>
+    <string name="CalculoIMC">BMI Calculation</string>
+</resources>

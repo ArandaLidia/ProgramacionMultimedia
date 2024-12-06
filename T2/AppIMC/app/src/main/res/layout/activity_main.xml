@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/app"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+<TextView
+android:id="@+id/textView"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:padding="15dp"
+android:text="@string/CalculoIMC"
+android:layout_gravity="center"
+android:gravity="center"
+android:textSize="25sp"
+    android:textAlignment="center"/>
+
+<EditText
+android:id="@+id/txtAltura"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:inputType="number"
+android:hint="@string/hint_altura"
+android:textSize="20sp"
+    android:padding="20dp"
+    android:layout_marginTop="20dp"/>
+
+<EditText
+
+android:id="@+id/txtPeso"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="20dp"
+android:inputType="number"
+android:hint="@string/hint_peso"
+android:textSize="20sp"
+    android:padding="20dp"/>
+
+<RadioGroup
+    android:id="@+id/radioGrupo"
+android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="25dp">
+<RadioButton
+    android:id="@+id/radioMasc"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="@string/txtMasc"
+android:textSize="15sp"
+android:layout_marginRight="30dp"/>
+
+<RadioButton
+    android:id="@+id/radioFem"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="@string/txtFem"
+android:textSize="15sp"/>
+    </RadioGroup>
+
+<Button
+    android:id="@+id/btnCalcular"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    android:text="@string/calcular"
+    android:textSize="20sp"
+    android:layout_marginTop="30dp"/>
+
+    </LinearLayout>
