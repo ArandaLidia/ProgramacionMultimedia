@@ -2,11 +2,12 @@ package com.example.appimc
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appimc.databinding.ActivitySecondBinding
 import com.google.android.material.snackbar.Snackbar
 
-class SecondActivity : AppCompatActivity(), View.OnClickListener {
+class SecondActivity : AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivitySecondBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +25,16 @@ class SecondActivity : AppCompatActivity(), View.OnClickListener {
 
             // Muestra los valores en el TextView (asegurando que el valor no sea 0.0 si no es válido)
             if (altura != 0.0) {
-                binding.txtAltura.text = altura.toString()
+                binding.txtAltura.setText(altura.toString())
+
             } else {
-                binding.txtAltura.text = "Valor no válido"
+                binding.txtAltura.setText("Valor no válido")
             }
 
             if (peso != 0.0) {
-                binding.txtPeso.text = peso.toString()
+                binding.txtPeso.setText(peso.toString())
             } else {
-                binding.txtPeso.text = "Valor no válido"
+                binding.txtPeso.setText("Valor no válido")
             }
         } else {
             // Muestra un mensaje de error si no se recibieron datos
@@ -40,12 +42,14 @@ class SecondActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         binding.btnCalcular.setOnClickListener(this)
+        val altura = binding.txtAltura.setOnClickListener(this)
+        val peso= binding.txtPeso.setOnClickListener(this);
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             binding.btnCalcular.id -> {
-                // Implementa la lógica de cálculo de IMC aquí
+
             }
         }
     }

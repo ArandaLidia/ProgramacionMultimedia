@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChe
         val peso = pesoTxt.toDoubleOrNull()
 
         if (altura != null && peso != null) {
-            val resultadoIMC = peso / (altura * altura)
+            //val resultadoIMC = peso / (altura * altura)
             // Muestra el resultado de IMC o realiza alguna acción con el resultado
         } else {
             Snackbar.make(binding.root, "Hay datos no válidos", Snackbar.LENGTH_SHORT).show()
